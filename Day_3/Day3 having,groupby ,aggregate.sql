@@ -161,7 +161,7 @@ HAVING AVG(total_amount) >50000;
 SELECT  salesperson,SUM(total_amount) AS total_sales FROM sales
 WHERE is_completed = TRUE
 GROUP BY salesperson
-HAVING SUM(total_amount) > 100000
+HAVING SUM(total_amount) >= 100000
 ORDER BY total_sales DESC;
 
 
