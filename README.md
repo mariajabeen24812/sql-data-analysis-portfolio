@@ -51,3 +51,92 @@ The goal of Day 01 was to understand the fundamentals of PostgreSQL and learn ho
 ### 🚀 Progress
 
 Day 01 ✅ Completed
+## 📅 Day 2 — SQL Filtering, Operators & Functions
+
+### Topics Covered
+
+- SELECT
+- WHERE
+- Comparison Operators
+- Logical Operators
+- AND
+- OR
+- NOT
+- IN
+- BETWEEN
+- LIKE
+- Pattern Matching
+- NULL checking
+- IS NULL
+- IS NOT NULL
+- String/Text functions
+- Date and Time functions
+
+### Practice Focus
+
+In Day 2, I practiced retrieving specific records from tables using different conditions and operators.
+
+I also practiced working with:
+
+- Text data
+- String functions
+- Dates
+- Time-related data
+- Filtering records
+- Multiple conditions
+
+### Skills Developed
+
+- Filtering data
+- Searching specific records
+- Working with text
+- Working with dates
+- Applying multiple conditions
+
+---
+
+# 📅 Day 3 — Aggregate Functions, GROUP BY & HAVING
+
+### Topics Covered
+
+- COUNT()
+- SUM()
+- AVG()
+- MAX()
+- MIN()
+- GROUP BY
+- HAVING
+- WHERE + Aggregate Functions
+- GROUP BY + Aggregate Functions
+- GROUP BY + HAVING
+- ORDER BY with Aggregated Results
+
+### Practice Examples
+
+I practiced questions such as:
+
+- Total sales records
+- Total quantity sold
+- Total sales amount
+- Average sales
+- Highest sale
+- Lowest sale
+- Category-wise sales
+- City-wise sales
+- Salesperson-wise sales
+- Category-wise maximum/minimum sales
+- Completed sales
+- High-performing categories
+- High-performing salespersons
+
+### Important Concepts
+
+#### WHERE
+
+`WHERE` filters rows **before grouping**.
+
+```sql
+SELECT category, SUM(total_amount)
+FROM sales
+WHERE is_completed = TRUE
+GROUP BY category;
