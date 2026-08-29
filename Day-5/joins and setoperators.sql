@@ -1,7 +1,24 @@
 -- today concept practics
 -- joins, set operators
 -- create employees table
-DROP TABLE if exists employees;
+-- =========================================
+-- DAY 5 — JOINS + SET OPERATORS
+-- =========================================
+
+-- =========================================
+-- DROP OLD TABLES
+-- =========================================
+
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS departments;
+DROP TABLE IF EXISTS cities;
+
+
+-- =========================================
+-- 1. EMPLOYEES TABLE
+-- =========================================
+
 CREATE TABLE employees (
     employee_id SERIAL PRIMARY KEY,
     employee_name VARCHAR(100),
@@ -25,7 +42,11 @@ VALUES
 ('Danish Malik', 4, 5, 1, 65000),
 ('Iqra Ahmed', 3, 4, 6, 88000);
 
--- create departmet table
+
+-- =========================================
+-- 2. DEPARTMENTS TABLE
+-- =========================================
+
 CREATE TABLE departments (
     department_id INT PRIMARY KEY,
     department_name VARCHAR(50)
@@ -39,7 +60,11 @@ VALUES
 (4, 'Sales'),
 (5, 'Marketing');
 
--- create cities tables
+
+-- =========================================
+-- 3. CITIES TABLE
+-- =========================================
+
 CREATE TABLE cities (
     city_id INT PRIMARY KEY,
     city_name VARCHAR(50)
@@ -55,17 +80,17 @@ VALUES
 (6, 'Peshawar'),
 (7, 'Quetta');
 
+
+-- =========================================
+-- 4. CUSTOMERS TABLE
+-- =========================================
+
 CREATE TABLE customers (
     customer_id SERIAL PRIMARY KEY,
     customer_name VARCHAR(100),
     city VARCHAR(50)
 );
--- create customers tables
-CREATE TABLE customers (
-    customer_id SERIAL PRIMARY KEY,
-    customer_name VARCHAR(100),
-    city VARCHAR(50)
-);
+
 INSERT INTO customers
 (customer_name, city)
 VALUES
@@ -76,101 +101,254 @@ VALUES
 ('Maria', 'Quetta'),
 ('Sana', 'Peshawar');
 
--- show all table
+
+-- =========================================
+-- SHOW TABLES
+-- =========================================
+
 SELECT * FROM employees;
 SELECT * FROM departments;
 SELECT * FROM cities;
--- Practice Questions
--- Part 1 — INNER JOIN
--- Q1 Har employee ka employee name + department name show karo.
-SELECT e.employee_name,d.department_id
+SELECT * FROM customers;
+
+
+-- =========================================
+-- PART 1 — INNER JOIN
+-- =========================================
+
+-- Q1
+-- Har employee ka employee name + department name show karo.
+
+SELECT 
+    e.employee_name,
+    d.department_name
 FROM employees e
-inner join
-department d
-on d.department_id = e.department_id;
--- Q2 Har employee ka employee name + city name show karo.
-SELECT e.employee_name,c.city_name
+INNER JOIN departments d
+    ON e.department_id = d.department_id;
+
+
+-- Q2
+-- Har employee ka employee name + city name show karo.
+
+SELECT 
+    e.employee_name,
+    c.city_name
 FROM employees e
-INNER JOIN
-cities c
-on c.city_id = e.city_id;
--- Q3 Employee name, department name aur salary show karo.
-SELECT e.employee_name,d.department_name
+INNER JOIN cities c
+    ON e.city_id = c.city_id;
+
+
+-- Q3
+-- Employee name, department name aur salary show karo.
+
+SELECT 
+    e.employee_name,
+    d.department_name,
+    e.salary
 FROM employees e
-INNER JOIN  department d
-on d.department_id = e.department_id;
--- Part 2 — LEFT JOIN AND RIGHT JOIN
--- Q4-Saare employees show karo, chahe unka department exist karta ho ya nahi.
-SELECT e.employee_name,d.department_name
+INNER JOIN departments d
+    ON e.department_id = d.department_id;
+
+
+-- =========================================
+-- PART 2 — LEFT JOIN / RIGHT JOIN
+-- =========================================
+
+-- Q4
+-- Saare employees show karo,
+-- chahe unka department exist karta ho ya nahi.
+
+SELECT 
+    e.employee_name,
+    d.department_name
 FROM employees e
-LEFT JOIN  departments d 
-ON e.department_id = d.department_id;
--- Q5  Saare departments show karo aur unke employees show karo.
+LEFT JOIN departments d
+    ON e.department_id = d.department_id;
+
+
+-- Q5
+-- Saare departments show karo aur unke employees show karo.
 -- Marketing bhi result mein aana chahiye.
-SELECT d.department_name,e.employee_name
+
+SELECT 
+    d.department_name,
+    e.employee_name
 FROM departments d
-RIGHT JOIN employees e
-on d.department_id = e.department_id;
+LEFT JOIN employees e
+    ON d.department_id = e.department_id;
 
--- Part 3 — FULL JOIN 
--- Q6- Employees aur departments ka FULL JOIN karo.
-SELECT e.employee_name,d.department_name
-FROM employees e
-FULL JOIN
-department d
-on d.department_id = e.department_id;
--- Q7 Cities aur employees ka FULL JOIN karo.
-SELECT e.employee_name,c.city_name
-FROM employees e
-FULL JOIN 
-cities c
-ON e.city_id = c.city_id;
 
--- Part 4 — SELF JOIN 
---Q8 Employees table mein: employee_id manager_id already diya hua hai.
-SELECT e1.employee_name,e2.salary
+-- RIGHT JOIN se bhi same result:
+
+SELECT 
+    d.department_name,
+    e.employee_name
+FROM employees e
+RIGHT JOIN departments d
+    ON e.department_id = d.department_id;
+
+
+-- =========================================
+-- PART 3 — FULL JOIN
+-- =========================================
+
+-- Q6
+-- Employees aur departments ka FULL JOIN karo.
+
+SELECT 
+    e.employee_name,
+    d.department_name
+FROM employees e
+FULL JOIN departments d
+    ON e.department_id = d.department_id;
+
+
+-- Q7
+-- Cities aur employees ka FULL JOIN karo.
+
+SELECT 
+    e.employee_name,
+    c.city_name
+FROM employees e
+FULL JOIN cities c
+    ON e.city_id = c.city_id;
+
+
+-- =========================================
+-- PART 4 — SELF JOIN
+-- =========================================
+
+-- Q8
+-- Har employee ka naam aur uske manager ka naam show karo.
+
+SELECT 
+    e1.employee_name AS employee,
+    e2.employee_name AS manager
 FROM employees e1
-JOIN 
-employees e2
-on e1.employee_id = e2.manager_id;
+LEFT JOIN employees e2
+    ON e1.manager_id = e2.employee_id;
 
--- Part 5 — Multi-Table JOIN 
--- Q9- Employee ka: employee name department name city name salary
-SELECT e.employee_name,d.department_name,c.city_name,e.salary
+
+-- =========================================
+-- PART 5 — MULTI-TABLE JOIN
+-- =========================================
+
+-- Q9
+-- Employee name + department name + city name + salary
+
+SELECT 
+    e.employee_name,
+    d.department_name,
+    c.city_name,
+    e.salary
 FROM employees e
-INNER JOIN 
-departments d
-on d.department_id = e.department_id
-INNER JOIN 
-cities c
-on c.city_id = e.city_id;
--- Part 6 — UNION
--- Q10 Employees aur customers ke cities ko combine karo aur duplicate cities remove karo.
-SELECT c.city_name FROM employees e
-inner join cities c
-on c.city_id = e.city_id
+INNER JOIN departments d
+    ON e.department_id = d.department_id
+INNER JOIN cities c
+    ON e.city_id = c.city_id;
+
+
+-- =========================================
+-- PART 6 — UNION
+-- =========================================
+
+-- Q10
+-- Employees aur customers ke cities combine karo
+-- aur duplicate cities remove karo.
+
+SELECT 
+    c.city_name
+FROM employees e
+INNER JOIN cities c
+    ON e.city_id = c.city_id
+
+UNION
+
+SELECT 
+    city
+FROM customers;
+
+
+-- =========================================
+-- PART 7 — UNION ALL
+-- =========================================
+
+-- Q11
+-- Employees aur customers ki cities combine karo
+-- duplicates bhi show karo.
+
+SELECT 
+    c.city_name
+FROM employees e
+INNER JOIN cities c
+    ON e.city_id = c.city_id
+
 UNION ALL
-SELECT city FROM customers ;
--- Part 7 — INTERSECT
--- Q11 Find karo kaun si cities employees aur customers dono mein hain.
-SELECT city_name FROM cities 
-INTERSECT 
-SELECT c.city_name FROM employees e
-inner join cities c
-on  c.city_id = e.city_id;
+
+SELECT 
+    city
+FROM customers;
 
 
--- Part 8 — EXCEPT
--- Q12-Find karo kaun si cities employees mein hain lekin customers mein nahi hain.
-SELECT c.city_name FROM employees e
-INNER JOIN 
-cities c
-ON c.city_id = e.city_id
-EXCEPT 
-SELECT city FROM customers;
+-- =========================================
+-- PART 8 — INTERSECT
+-- =========================================
+
+-- Q12
+-- Kaun si cities employees aur customers dono mein hain?
+
+SELECT 
+    c.city_name
+FROM employees e
+INNER JOIN cities c
+    ON e.city_id = c.city_id
+
+INTERSECT
+
+SELECT 
+    city
+FROM customers;
 
 
+-- =========================================
+-- PART 9 — EXCEPT
+-- =========================================
 
+-- Q13
+-- Kaun si cities employees mein hain
+-- lekin customers mein nahi?
+
+SELECT 
+    c.city_name
+FROM employees e
+INNER JOIN cities c
+    ON e.city_id = c.city_id
+
+EXCEPT
+
+SELECT 
+    city
+FROM customers;
+
+
+-- =========================================
+-- Q14 — EXCEPT
+-- =========================================
+
+-- Kaun si cities customers mein hain
+-- lekin employees mein nahi?
+
+SELECT 
+    city
+FROM customers
+
+EXCEPT
+
+SELECT 
+    c.city_name
+FROM employees e
+INNER JOIN cities c
+    ON e.city_id = c.city_id;
 
 
 
