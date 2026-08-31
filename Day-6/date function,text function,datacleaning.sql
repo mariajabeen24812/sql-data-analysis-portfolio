@@ -1,3 +1,8 @@
+---------------------------------------------------------------
+-- TODAY CONCEPT:date function, text function, data cleaning
+----------------------------------------------------------------
+
+
 DROP TABLE IF EXISTS patient_cleaning;
 
 CREATE TABLE patient_cleaning (
