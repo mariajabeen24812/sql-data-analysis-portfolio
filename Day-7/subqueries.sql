@@ -135,3 +135,21 @@ WHERE doctor_id IN (
     SELECT doctor_id
     FROM appointments
 );
+--------------------------------------------------------------------
+-- Part C — Subquery in FROM
+----------------------------------------------------------------------
+-- Pehle har department ki average salary calculate karo,
+-- phir us temporary result se departments aur average salary show karo.
+SELECT department,avg_salary FROM(
+	SELECT department, AVG(salary) AS avg_salary 
+	FROM doctors
+	GROUP BY department
+) ;
+
+-- Har doctor ka total payment calculate karo 
+-- aur sirf un doctors ko show karo jinka total payment 20,000 se zyada hai.
+
+SELECT doctor_id, total_payment FROM(
+	SELECT doctor_id, SUM(payment) AS total_payment FROM appointments
+		GROUP BY doctor_id ) AS  doctor_payment
+WHERE total_payment > 20000;
