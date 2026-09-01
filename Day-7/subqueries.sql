@@ -96,7 +96,7 @@ WHERE salary = (
 
 -- Aise doctors find karo jinki salary minimum salary se zyada hai
 SELECT doctor_name,salary FROM doctors
-WHERE salary = (
+WHERE salary > (
 	SELECT MIN(salary) FROM doctors
 );
 
