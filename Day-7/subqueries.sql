@@ -105,4 +105,33 @@ SELECT patient_name,age FROM patients
 WHERE age = (
 	SELECT MAX(age) FROM patients
 );
+----------------------------------------------------------
+-- Part B — IN + Subquery
+-----------------------------------------------------------
+-- Un doctors ko find karo jo un cities mein kaam kar rahe hain jahan patients exist karte hain.
+SELECT doctor_name,city FROM doctors
+WHERE city IN (
+	SELECT city FROM patients
+);
+-- Un patients ko find karo jinhon ne at least ek appointment li hai.
+SELECT p.patient_name,a.appointment_id FROM appointments a
+inner join patients p
+on a.patient_id = p.patient_id
+WHERE appointment_id  IN (
+	SELECT appointment_id FROM appointments
+	WHERE appointment_id <= 1
+);
 
+SELECT patient_name
+FROM patients
+WHERE patient_id IN (
+    SELECT patient_id
+    FROM appointments
+);
+-- Un doctors ko find karo jinhon ne at least ek appointment handle ki hai.
+SELECT doctor_name
+FROM doctors
+WHERE doctor_id IN (
+    SELECT doctor_id
+    FROM appointments
+);
