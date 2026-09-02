@@ -153,3 +153,32 @@ SELECT doctor_id, total_payment FROM(
 	SELECT doctor_id, SUM(payment) AS total_payment FROM appointments
 		GROUP BY doctor_id ) AS  doctor_payment
 WHERE total_payment > 20000;
+----------------------------------------------------------------
+-- correlated subqueries
+----------------------------------------------------------------
+-- Department ki average salary se zyada salary wale doctors
+SELECT doctor_name,
+       department,
+       salary,
+       AVG(salary) OVER (PARTITION BY department) AS department_avg_salary
+FROM doctors;
+-- Department ki minimum salary se zyada salary wale doctors
+SELECT *
+FROM (
+    SELECT doctor_name,
+           department,
+           salary,
+           MIN(salary) OVER (PARTITION BY department) AS department_min_salary
+    FROM doctors
+) AS d
+WHERE salary > department_min_salary;
+-- City ke average age se zyada age wale patients
+SELECT *
+FROM (
+    SELECT patient_name,
+           city,
+           age,
+           AVG(age) OVER (PARTITION BY city) AS city_avg_age
+    FROM patients
+) AS p
+WHERE age > city_avg_age;
