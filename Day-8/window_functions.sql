@@ -205,7 +205,22 @@ SELECT salesperson,amount,
         ORDER BY order_date
     ) AS percent_rank
 FROM sales;
+--------------------------------------------------
+-- CTE(Common table expression) 
+--------------------------------------------------
+-- Har region ka highest-selling salesperson find karo.
 
+WITH ranked_sales AS(
+	SELECT salesperson, region, amount,(
+			ROW_NUMBER() OVER(
+				PARTITION BY  region
+				ORDER BY amount ) AS row_no
+			)
+FROM sales
+	)
+SELECT salesperson,region,amount 
+FROM sales
+WHERE row_no = 1;
 
 
 
