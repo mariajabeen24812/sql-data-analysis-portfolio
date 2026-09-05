@@ -222,7 +222,19 @@ SELECT salesperson,region,amount
 FROM sales
 WHERE row_no = 1;
 
+--------------------------------------
+-- use  views
+--------------------------------------
 
+CREATE VIEW high_value_sales AS
+SELECT
+    salesperson,
+    region,
+    amount
+FROM sales
+WHERE amount >= 100000;
+
+SELECT * from high_value_sales;
 
 
 
