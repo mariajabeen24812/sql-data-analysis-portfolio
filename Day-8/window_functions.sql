@@ -235,7 +235,22 @@ FROM sales
 WHERE amount >= 100000;
 
 SELECT * from high_value_sales;
+------------------------------------------
+-- use commit and rollback
+-------------------------------------------
+BEGIN;
 
+UPDATE sales
+SET amount = 200000
+WHERE sale_id = 1;
+
+COMMIT;
+
+BEGIN;
+
+UPDATE sales
+SET amount = 999999
+WHERE sale_id = 1;
 
 
 
