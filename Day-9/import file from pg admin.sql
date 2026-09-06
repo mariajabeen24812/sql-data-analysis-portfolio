@@ -209,6 +209,25 @@ ORDER BY b.amount DESC
 LIMIT 1;
 -- ADVANCED(VIEW,WINDOW FUNCTION)
 -- make a view move name plus revenue
+CREATE VIEW move_name AS
+SELECT m.title,sum(b.amount) AS revenue
+FROM bookings b
+	inner join shows s
+		ON s.show_id = b.show_id
+	INNER JOIN movies m
+		ON m.movie_id = s.movie_id
+	GROUP by m.title;
+SELECT * FROM move_name;
+
 -- rank() window function har movie ko revenue ke hisaab se rank do
+SELECT  m.title,sum(b.amount)AS total_revenue,
+	RANK()  OVER(
+		order by sum(b.amount) DESC
+	) AS rank
+FROM bookings b
+	inner join shows s
+		ON s.show_id = b.show_id
+	INNER JOIN movies m
+		ON m.movie_id = s.movie_id;
 -- runnin total date wise cumulaative revenue(sum(,over))
 -- har theatre mein top 3 highest revenue wali movies 
