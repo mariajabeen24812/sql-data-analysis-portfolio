@@ -1,0 +1,108 @@
+movie_id,title,genre,duration_min,language
+1,Inception,Musical,104,English
+2,The Dark Knight,Fantasy,125,Hindi
+3,Interstellar,Thriller,107,Spanish
+4,Avengers Endgame,Drama,176,Spanish
+5,Joker,Adventure,101,Korean
+6,Parasite,Horror,94,English
+7,The Matrix,Drama,117,Hindi
+8,Titanic,Adventure,167,English
+9,Gladiator,Adventure,115,Spanish
+10,Forrest Gump,Musical,179,Korean
+11,The Shawshank Redemption,Horror,118,Punjabi
+12,Fight Club,Crime,125,English
+13,Pulp Fiction,Comedy,179,Punjabi
+14,The Godfather,Romance,125,Hindi
+15,Whiplash,Thriller,133,English
+16,La La Land,Drama,138,English
+17,Dune,Romance,134,Korean
+18,Oppenheimer,Sci-Fi,95,Spanish
+19,Barbie,Animation,158,English
+20,Top Gun Maverick,Horror,100,Korean
+21,Spider-Man No Way Home,Sci-Fi,170,Korean
+22,Black Panther,Romance,163,Hindi
+23,Doctor Strange,Fantasy,98,English
+24,Thor Ragnarok,Musical,119,Urdu
+25,Guardians of the Galaxy,Drama,119,English
+26,Iron Man,Horror,125,Punjabi
+27,Captain America Civil War,Musical,136,Hindi
+28,Logan,Romance,135,Hindi
+29,Deadpool,Musical,124,Spanish
+30,Wonder Woman,Musical,172,English
+31,Aquaman,Crime,171,Hindi
+32,Shazam,Adventure,121,Hindi
+33,The Batman,Animation,138,Urdu
+34,Venom,Musical,178,Korean
+35,Jurassic Park,Thriller,177,Urdu
+36,Jurassic World,Action,119,English
+37,King Kong,Romance,141,Urdu
+38,Godzilla,Drama,117,Korean
+39,Mad Max Fury Road,Fantasy,130,Hindi
+40,John Wick,Musical,153,Punjabi
+41,The Bourne Identity,Musical,148,Hindi
+42,Mission Impossible,Sci-Fi,107,Hindi
+43,Fast Five,Fantasy,161,Korean
+44,The Fast and the Furious,Sci-Fi,164,Punjabi
+45,Baby Driver,Crime,141,Urdu
+46,Kingsman,Thriller,107,Korean
+47,Skyfall,Animation,101,English
+48,Casino Royale,Drama,109,Spanish
+49,No Time to Die,Comedy,177,Punjabi
+50,Bohemian Rhapsody,Crime,98,Punjabi
+51,A Star is Born,Horror,166,Punjabi
+52,The Greatest Showman,Adventure,122,Korean
+53,Coco,Action,177,Spanish
+54,Frozen,Drama,177,Korean
+55,Moana,Sci-Fi,172,Urdu
+56,Zootopia,Drama,127,Punjabi
+57,Up,Comedy,148,English
+58,Inside Out,Fantasy,123,Korean
+59,Toy Story,Comedy,154,English
+60,Finding Nemo,Musical,128,Spanish
+61,Ratatouille,Adventure,167,Hindi
+62,WALL-E,Comedy,137,Hindi
+63,Shrek,Adventure,157,English
+64,Kung Fu Panda,Crime,131,Punjabi
+65,How to Train Your Dragon,Action,104,Urdu
+66,Despicable Me,Sci-Fi,120,English
+67,Minions,Thriller,162,English
+68,Sing,Drama,152,English
+69,The Lion King,Adventure,106,Hindi
+70,Aladdin,Musical,150,Korean
+71,Beauty and the Beast,Comedy,123,Korean
+72,3 Idiots,Crime,144,Hindi
+73,Dangal,Adventure,178,Hindi
+74,PK,Fantasy,129,Punjabi
+75,Bajrangi Bhaijaan,Musical,173,Urdu
+76,Sultan,Animation,156,Punjabi
+77,Tiger Zinda Hai,Drama,121,Hindi
+78,War,Drama,133,English
+79,Pathaan,Crime,160,Hindi
+80,Jawan,Crime,118,English
+81,Animal,Drama,180,Spanish
+82,Gadar 2,Action,119,English
+83,RRR,Action,132,English
+84,KGF Chapter 2,Adventure,120,Urdu
+85,Kabir Singh,Musical,152,Hindi
+86,Kesari,Adventure,106,Spanish
+87,Uri The Surgical Strike,Crime,163,Punjabi
+88,Chak De India,Thriller,150,Punjabi
+89,Queen,Thriller,102,English
+90,Zindagi Na Milegi Dobara,Musical,145,Urdu
+91,Andhadhun,Horror,142,Punjabi
+92,Drishyam,Fantasy,96,Spanish
+93,Talaash,Musical,172,English
+94,Bareilly Ki Barfi,Action,141,Spanish
+95,Stree,Romance,103,Hindi
+96,Tumhari Sulu,Thriller,114,Korean
+97,Badhaai Ho,Animation,107,Punjabi
+98,Article 15,Comedy,125,Punjabi
+99,Shubh Mangal Saavdhan,Thriller,99,Punjabi
+100,Bala,Adventure,102,English
+101,Chhichhore,Musical,159,English
+102,Gully Boy,Drama,120,Hindi
+103,Super 30,Horror,152,Punjabi
+104,Mission Mangal,Thriller,141,English
+105,Housefull 4,Comedy,138,English
+106,Good Newwz,Horror,123,Punjabi
+107,Tanhaji,Sci-Fi,144,Spanish
