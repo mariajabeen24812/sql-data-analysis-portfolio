@@ -230,4 +230,35 @@ FROM bookings b
 	INNER JOIN movies m
 		ON m.movie_id = s.movie_id;
 -- runnin total date wise cumulaative revenue(sum(,over))
+SELECT booking_date,
+	sum(daily_revenue) OVER(
+		ORDER BY booking_date ) AS running_total
+	FROM (
+		SELECT booking_date,
+		SUM(amount) AS daily_revenue
+	FROM bookings
+	GROUP BY booking_date
+
 -- har theatre mein top 3 highest revenue wali movies 
+SELECT theatre_name,total_revenue FROM
+	( 
+	SELECT t.name AS theatre_name, sum(b.amount) AS total_revenue,
+	RANK() OVER (
+            PARTITION BY t.name
+            ORDER BY SUM(b.amount) DESC
+        ) AS revenue_rank
+FROM booking b
+	inner join 
+	shows s
+		on s.show_id = b.show_id
+	INNER JOIN
+	screen sc
+		on sc.screen_id = s.screen_id
+	inner join
+	theatres t
+		on t.theatre_id = sc.theatre_id
+GROUP BY
+        t.name
+) AS highest_revenue 
+	
+WHERE revenue_rank <= 3;
