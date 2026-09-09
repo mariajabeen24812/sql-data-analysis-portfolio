@@ -411,4 +411,17 @@ GROUP BY t.department_name
 HAVING SUM(p.amount) >= 10000
 ORDER BY total_payment DESC;
 
+-- Har booking ka amount aur seats_booked show karo, aur ek naya column banao seat per booking
+SELECT seats_booked, amount, seats_booked/amount AS amount_per seat
+FROM bookings;
+-- Har booking_date ka total revenue nikalo.
+SELECT booking_date, sum(amount) AS total_revenue
+FROM bookings
+GROUP BY booking_date;
+-- Har customer_id ne kitni total seats book ki hain,or total kartni amount bani.
+SELECT customer_id, sum(seats_booked) AS total_seat, SUM(amount AS total_amount
+FROM bookings
+GROUP BY customer_id;
+
+
 
