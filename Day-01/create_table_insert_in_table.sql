@@ -28,3 +28,6 @@ VALUES
 
 -- concept 4: show this table
 SELECT * From employees;
+-- show specific column
+SELECT first_name, last_name FROM employees;
+
