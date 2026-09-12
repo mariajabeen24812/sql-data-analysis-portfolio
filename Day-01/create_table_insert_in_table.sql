@@ -31,3 +31,6 @@ SELECT * From employees;
 -- show specific column
 SELECT first_name, last_name FROM employees;
 
+SELECT first_name FROM employees
+WHERE age = 3;
+
