@@ -1,7 +1,7 @@
 -- TODAY LEARNING CONCEPT
--- DATA FILTERATION AND SORTING
--- where
--- comparision operation(and, or, not,between,in , not in, like, ilike,isnotnull,isnull,orderby,offset,limit
+--1- DATA FILTERATION AND SORTING
+-- 2- conditon with where
+-- 3- conditon with comparision operation(and, or, not,between,in , not in, like, ilike,isnotnull,isnull,orderby,offset,limit
 -- distinct, as)
 
 -- create table
