@@ -79,17 +79,58 @@ VALUES
 -----------------------------------------------------
 -- practics of  Window Functions
 ------------------------------------------------------
--- Focus: ROW_NUMBER(), RANK(), DENSE_RANK(), LAG(), LEAD(), SUM() OVER(), AVG() OVER()
-
--- Q1–Q10
 -- Har order ko total_amount DESC ke according ROW_NUMBER() do.
+select order_id,total_amount,
+	ROW_NUMBER() OVER(
+		ORDER BY total_amount DESC
+	) AS row_number
+FROM ecommerce_sales;
 -- Har city ke andar orders ko total_amount DESC ke according ROW_NUMBER() do.
+SELECT city,total_amount,
+	ROW_NUMBER()  OVER(
+		PARTITION BY city
+		ORDER BY total_amount DESC
+	) AS row_number
+FROM ecommerce_sales;
+
 -- Har category ke andar sales ko rank karo using RANK().
+SELECT category,total_amount,
+	RANK() OVER(
+		PARTITION BY category
+		order by total_amount desc
+		) as rank
+FROM ecommerce_sales;
 -- Har salesperson ke orders ko total_amount DESC ke according DENSE_RANK() do.
+SELECT salesperson, total_amount,
+	DENSE_RANK() OVER(
+		partition by salesperson
+		ORDER BY total_amount DESC
+	) AS dense_rank
+FROM ecommerce_sales;
 -- Har order ke saath previous order ka total_amount show karo using LAG().
+SELECT product_name, total_amount,
+	LAG(total_amount) OVER(
+		order by total_amount) 
+		AS perivous_value
+FROM ecommerce_sales;
 -- Har order ke saath next order ka total_amount show karo using LEAD().
+SELECT product_name, total_amount,
+	LEAD(total_amount) OVER(
+		order by total_amount) 
+		AS next_value
+FROM ecommerce_sales;
 -- Har city ki total sales calculate karo using SUM() OVER(PARTITION BY city).
+SELECT salesperson,city,
+	SUM(total_amount) over(
+		PARTITION BY city
+		) as total_sale
+FROM ecommerce_sales;
 -- Har category ki average order value show karo using AVG() OVER().
+SELECT category,
+	AVG(total_amount) over(
+		PARTITION BY category
+		) as avg_sale
+FROM ecommerce_sales;
 -- Har order ke total amount ko city ki total sales ke percentage ke taur par calculate karo.
 -- Har city ka top 2 highest-value orders find karo using a window function.
 -- 📅 DAY 2 — Advanced Window Functions
