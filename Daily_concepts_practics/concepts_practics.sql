@@ -85,6 +85,7 @@ select order_id,total_amount,
 		ORDER BY total_amount DESC
 	) AS row_number
 FROM ecommerce_sales;
+
 -- Har city ke andar orders ko total_amount DESC ke according ROW_NUMBER() do.
 SELECT city,total_amount,
 	ROW_NUMBER()  OVER(
@@ -100,6 +101,7 @@ SELECT category,total_amount,
 		order by total_amount desc
 		) as rank
 FROM ecommerce_sales;
+
 -- Har salesperson ke orders ko total_amount DESC ke according DENSE_RANK() do.
 SELECT salesperson, total_amount,
 	DENSE_RANK() OVER(
@@ -107,37 +109,76 @@ SELECT salesperson, total_amount,
 		ORDER BY total_amount DESC
 	) AS dense_rank
 FROM ecommerce_sales;
+
 -- Har order ke saath previous order ka total_amount show karo using LAG().
 SELECT product_name, total_amount,
 	LAG(total_amount) OVER(
 		order by total_amount) 
 		AS perivous_value
 FROM ecommerce_sales;
+
 -- Har order ke saath next order ka total_amount show karo using LEAD().
 SELECT product_name, total_amount,
 	LEAD(total_amount) OVER(
 		order by total_amount) 
 		AS next_value
 FROM ecommerce_sales;
+
 -- Har city ki total sales calculate karo using SUM() OVER(PARTITION BY city).
 SELECT salesperson,city,
 	SUM(total_amount) over(
 		PARTITION BY city
 		) as total_sale
 FROM ecommerce_sales;
+
 -- Har category ki average order value show karo using AVG() OVER().
 SELECT category,
 	AVG(total_amount) over(
 		PARTITION BY category
 		) as avg_sale
 FROM ecommerce_sales;
--- Har order ke total amount ko city ki total sales ke percentage ke taur par calculate karo.
+
 -- Har city ka top 2 highest-value orders find karo using a window function.
+SELECT city,total_amount,sales_rank FROM(
+	SELECT city,total_amount,
+		RANK() over(
+			partition by city
+			order by total_amount desc
+		) AS sales_rank
+	FROM ecommerce_sales
+) AS rank_sales
+WHERE sales_rank <= 2;
+
 -- 📅 DAY 2 — Advanced Window Functions
--- Q11–Q20
 -- Har salesperson ke orders ko highest se lowest sales ke according rank karo.
+SELECT salesperson,total_amount,
+	rank() over(
+		partition by salesperson
+		ORDER BY total_amount desc
+	) as rank_sales
+FROM ecommerce_sales;
+
 -- Har category mein highest-selling order find karo.
+SELECT category,total_amount,sales_rank FROM (
+	SELECT category,total_amount,
+		rank() over(
+			partition by category
+			order by total_amount desc
+		) as sales_rank
+	from ecommerce_sales
+) rank_sales
+WHERE sales_rank = 1;
+
 -- Har city mein second-highest order find karo.
+SELECT city,total_amount,sales_rank FROM(
+	SELECT city,total_amount,
+		RANK() over(
+			partition by city
+			order by total_amount desc
+		) AS sales_rank
+	FROM ecommerce_sales
+) AS rank_sales
+WHERE sales_rank = 2;
 -- Har salesperson ki cumulative sales calculate karo using SUM() OVER(ORDER BY ...).
 -- Har date ke saath previous date ki sales compare karo.
 -- Har order ka difference previous order se calculate karo.
