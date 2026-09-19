@@ -194,7 +194,7 @@ SELECT order_date,total_amount,
 	ORDER BY order_date 
 	) as perivous_value
 FROM ecommerce_sales;
-SELECT * FROM ecommerce_sales;
+
 
 -- Har order ka difference previous order se calculate karo.
 SELECT order_date,total_amount,
@@ -206,6 +206,12 @@ SELECT order_date,total_amount,
 FROM ecommerce_sales;
 
 -- Har salesperson ki average sales aur individual order amount ek hi result mein show karo.
+SELECT salesperson,product_name,total_amount,
+	AVG(total_amount) OVER(
+		PARTITION BY salesperson 
+	)AS avg_order_amount
+FROM ecommerce_sales;
+
 -- Har city mein top 3 customers/orders identify karo based on total_amount.
 -- RANK() aur DENSE_RANK() dono use karke category-wise ranking compare karo.
 -- 📅 DAY 3 — CTE
