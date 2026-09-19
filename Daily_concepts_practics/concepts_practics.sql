@@ -213,6 +213,17 @@ SELECT salesperson,product_name,total_amount,
 FROM ecommerce_sales;
 
 -- Har city mein top 3 customers/orders identify karo based on total_amount.
+SELECT customer_name,city,total_amount,sales_rank
+FROM (
+	SELECT customer_name,city,total_amount,
+		RANK() OVER(
+			PARTITION BY city
+			order by total_amount desc
+		)as sales_rank
+	FROM ecommerce_sales
+	) as rank_sales
+WHERE sales_rank <= 3;
+
 -- RANK() aur DENSE_RANK() dono use karke category-wise ranking compare karo.
 -- 📅 DAY 3 — CTE
 
