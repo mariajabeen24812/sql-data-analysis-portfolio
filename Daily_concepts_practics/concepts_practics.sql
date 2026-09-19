@@ -179,10 +179,32 @@ SELECT city,total_amount,sales_rank FROM(
 	FROM ecommerce_sales
 ) AS rank_sales
 WHERE sales_rank = 2;
+
 -- Har salesperson ki cumulative sales calculate karo using SUM() OVER(ORDER BY ...).
+SELECT salesperson,product_name,total_amount,
+	SUM(total_amount) over(
+		partition by salesperson
+		ORDER BY total_amount desc
+	) as commulative_sales
+FROM ecommerce_sales;
+
 -- Har date ke saath previous date ki sales compare karo.
+SELECT order_date,total_amount,
+	LAG(total_amount) over(
+	ORDER BY order_date 
+	) as perivous_value
+FROM ecommerce_sales;
+SELECT * FROM ecommerce_sales;
+
 -- Har order ka difference previous order se calculate karo.
--- Har category ka running total calculate karo.
+SELECT order_date,total_amount,
+-- LAG(total_amount) over(
+-- 	ORDER BY order_date 
+-- 	) as perivous_value,
+	total_amount - lag(total_amount) over(
+	) as diff_value
+FROM ecommerce_sales;
+
 -- Har salesperson ki average sales aur individual order amount ek hi result mein show karo.
 -- Har city mein top 3 customers/orders identify karo based on total_amount.
 -- RANK() aur DENSE_RANK() dono use karke category-wise ranking compare karo.
