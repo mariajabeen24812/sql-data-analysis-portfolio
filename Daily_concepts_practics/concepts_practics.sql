@@ -225,7 +225,16 @@ FROM (
 WHERE sales_rank <= 3;
 
 -- RANK() aur DENSE_RANK() dono use karke category-wise ranking compare karo.
--- 📅 DAY 3 — CTE
+SELECT category,total_amount,
+	rank() over(
+	PARTITION BY category
+	order by total_amount desc
+	) as sale_rank,
+	DENSE_RANK() OVER(
+	PARTITION BY category
+	ORDER by total_amount desc
+	) as dense_rank
+FROM ecommerce_sales;
 
 -- Focus: WITH, multiple CTEs, CTE + aggregation, CTE + window functions.
 
