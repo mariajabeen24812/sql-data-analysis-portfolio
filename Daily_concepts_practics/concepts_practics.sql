@@ -236,13 +236,41 @@ SELECT category,total_amount,
 	) as dense_rank
 FROM ecommerce_sales;
 
--- Focus: WITH, multiple CTEs, CTE + aggregation, CTE + window functions.
-
--- Q21–Q30
 -- CTE bana kar sirf Completed orders nikalo, phir unki total sales calculate karo.
+with completed_order as (
+	SELECT product_name,order_status,total_amount
+	FROM ecommerce_sales
+	where order_status = 'Completed'
+
+)
+SELECT sum(total_amount) as total_sales FROM completed_order;
+
 -- CTE se city-wise total sales calculate karo.
+with total_sales_city as (
+	SELECT city, sum(total_amount) as total_sales
+	FROM ecommerce_sales
+	GROUP BY city
+)
+SELECT city,total_sales from total_sales_city;
+
 -- CTE use karke sirf woh cities find karo jinki sales 200000 se zyada hain.
+with total_sales_city as (
+	SELECT city, sum(total_amount) as total_sales
+	FROM ecommerce_sales
+	GROUP BY city
+)
+SELECT city,total_sales 
+from total_sales_city
+WHERE total_sales > 200000;
+
 -- CTE bana kar salesperson-wise total sales calculate karo aur highest salesperson find karo.
+with total_sales_person as (
+	SELECT salesperson, sum(total_amount) as total_sales
+	FROM ecommerce_sales
+	GROUP BY salesperson
+)
+SELECT salesperson,total_sales from total_sales_person;
+
 -- CTE use karke category-wise average order amount calculate karo.
 -- CTE se total_amount > 100000 orders nikalo aur unka count calculate karo.
 -- Do CTEs banao:
