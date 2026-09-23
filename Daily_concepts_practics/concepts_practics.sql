@@ -272,6 +272,13 @@ with total_sales_person as (
 SELECT salesperson,total_sales from total_sales_person;
 
 -- CTE use karke category-wise average order amount calculate karo.
+WITH average_order as (
+	SELECT category,avg(total_amount) as average_sale
+	FROM ecommerce_sales
+	GROUP bY category
+)
+SELECT category, average_sale
+FROM average_order;
 -- CTE se total_amount > 100000 orders nikalo aur unka count calculate karo.
 -- Do CTEs banao:
 -- city-wise sales
