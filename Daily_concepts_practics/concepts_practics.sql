@@ -280,10 +280,38 @@ WITH average_order as (
 SELECT category, average_sale
 FROM average_order;
 -- CTE se total_amount > 100000 orders nikalo aur unka count calculate karo.
+WITH total_sales as(
+	SELECT total_amount, count(total_amount) as total_orders
+	FROM ecommerce_sales
+	WHERE total_amount > 100000
+	GROUP BY total_amount
+)
+SELECT * FROM total_sales;
 -- Do CTEs banao:
 -- city-wise sales
 -- category-wise sales
 -- Phir dono ko combine karo.
+WITH total_sales_city AS (
+    SELECT
+        city,
+        SUM(total_amount) AS total_sales
+    FROM ecommerce_sales
+    GROUP BY city
+),
+average_order AS (
+    SELECT
+        category,
+        AVG(total_amount) AS average_sale
+    FROM ecommerce_sales
+    GROUP BY category
+)
+SELECT
+    av.category,
+    av.average_sale,
+    c.city,
+    c.total_sales
+FROM average_order av
+CROSS JOIN total_sales_city c;
 -- CTE + RANK() use karke har city ka top customer/order find karo.
 -- CTE use karke monthly sales calculate karo.
 -- Multiple CTEs use karke find karo:
