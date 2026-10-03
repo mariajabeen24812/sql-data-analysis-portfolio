@@ -313,19 +313,71 @@ SELECT
 FROM average_order av
 CROSS JOIN total_sales_city c;
 -- CTE + RANK() use karke har city ka top customer/order find karo.
+with total_sales_city as (
+	SELECT customer_name, city, total_amount,
+	RANK() OVER(
+	PARTITION BY city
+	order by total_amount desc
+	) as sales_rank
+	FROM ecommerce_sales
+)
+select customer_name,city, total_amount,sales_rank FROM total_sales_city
+where sales_rank = 1 ;
 -- CTE use karke monthly sales calculate karo.
+WITH monthly_sales as (
+	SELECT extract(month from order_date) as months,sum(total_amount)
+	FROM ecommerce_sales
+	group by  months
+	
+	
+)
+SELECT * from monthly_sales;
 -- Multiple CTEs use karke find karo:
 -- total sales
 -- average order value
 -- total orders
 -- for each city.
--- 📅 DAY 4 — VIEW
+WITH total_sales as(
+ 	SELECT city,sum(total_amount) as total_sales
+	FROM ecommerce_sales
+	GROUP BY city 
+),
 
--- Focus: CREATE VIEW, SELECT FROM VIEW, DROP VIEW, analytical views.
+	average_order as(
+	SELECT city,avg(quantity) as avg_order
+	FROM ecommerce_sales
+	GROUP BY city
+),
 
--- Q31–Q40
+	total_order as(
+	SELECT city,sum(quantity) as total_order
+	FROM ecommerce_sales
+	GROUP BY city
+)
+SELECT s.city,t.total_order,a.avg_order,s.total_sales
+FROM total_order t
+join
+total_sales s
+on t.city = s.city
+join
+average_order a
+on s.city = a.city ;
+
+
 -- completed_orders naam ka view banao jisme sirf completed orders hon.
+CREATE VIEW  completed_order as (
+	SELECT product_name, order_status
+	FROM ecommerce_sales
+	where order_status = 'Completed'
+)
+SELECT * FROM completed_order;
 -- city_sales naam ka view banao jisme city-wise total sales hon.
+CREATE VIEW  city_sales as (
+	SELECT city, sum(total_amount)
+	FROM ecommerce_sales
+	group by city
+)
+SELECT * FROM city_sales;
 -- category_sales naam ka view banao jisme category-wise:
 -- total sales
 -- average sales
