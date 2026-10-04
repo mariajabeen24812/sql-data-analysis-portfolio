@@ -382,6 +382,11 @@ SELECT * FROM city_sales;
 -- total sales
 -- average sales
 -- number of orders
+CREATE VIEW AS category_name
+	SELECT  category,SUM(total_amount),avg(total_amount),count(*),
+	FROM ecommerce_sales
+	group by product_name;
+SELECT * FROM category_name;
 -- salesperson_performance naam ka view banao.
 
 -- Ismein:
