@@ -387,18 +387,13 @@ CREATE VIEW AS category_name
 	FROM ecommerce_sales
 	group by product_name;
 SELECT * FROM category_name;
--- salesperson_performance naam ka view banao.
-
--- Ismein:
-
--- salesperson
--- total orders
--- total sales
--- average order value
-
--- show karo.
 
 -- high_value_orders naam ka view banao jisme total_amount > 100000 ho.
+CREATE VIEW  high_value_orders AS
+	SELECT total_amount as total_sales
+	FROM ecommerce_sales
+	WHERE total_amount > 100000;
+SELECT * FROM  high_value_orders;
 -- Kisi existing view ko query karke Lahore ki sales find karo.
 -- View se highest-selling category find karo.
 -- View se highest-performing salesperson find karo.
