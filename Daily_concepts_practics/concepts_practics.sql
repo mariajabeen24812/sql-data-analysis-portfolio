@@ -395,7 +395,10 @@ CREATE VIEW  high_value_orders AS
 	WHERE total_amount > 100000;
 SELECT * FROM  high_value_orders;
 -- Kisi existing view ko query karke Lahore ki sales find karo.
+SELECT * FROM city-sales
+WHERE city = 'Lahore';
 -- View se highest-selling category find karo.
+
 -- View se highest-performing salesperson find karo.
 -- Ek view banao jisme monthly sales hon, phir us view se March ki sales find karo.
 -- Kisi ek view ko DROP VIEW karo aur phir dobara create karo.
