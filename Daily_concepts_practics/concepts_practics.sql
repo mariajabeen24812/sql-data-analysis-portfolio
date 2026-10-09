@@ -398,7 +398,20 @@ SELECT * FROM  high_value_orders;
 SELECT * FROM city-sales
 WHERE city = 'Lahore';
 -- View se highest-selling category find karo.
+CREATE VIEW  highest_selling AS
+	SELECT category, SUM(total_amount) as total_sales
+	RANK() OVER (
+		ORDER BY SUM(total_amount) desc
+	) as sales_rank
+from ecommerce_sales
+GROUP BY category;
 
+SELECT * FROM highest_selling 
+WHERE sales_rank = 1;
+
+
+ 
+	
 -- View se highest-performing salesperson find karo.
 -- Ek view banao jisme monthly sales hon, phir us view se March ki sales find karo.
 -- Kisi ek view ko DROP VIEW karo aur phir dobara create karo.
