@@ -409,10 +409,17 @@ GROUP BY category;
 SELECT * FROM highest_selling 
 WHERE sales_rank = 1;
 
-
- 
-	
 -- View se highest-performing salesperson find karo.
+CREATE VIEW  high_performace AS
+	SELECT salesperson,SUM(total_amount) as total_sales
+	RANK() OVER (
+		ORDER BY SUM(total_amount) desc
+	) as sales_rank
+from ecommerce_sales
+GROUP BY salesperson;
+
+SELECT * FROM hight_performance
+WHERE sales_rank = 1;
 -- Ek view banao jisme monthly sales hon, phir us view se March ki sales find karo.
 -- Kisi ek view ko DROP VIEW karo aur phir dobara create karo.
 -- 📅 DAY 5 — COMMIT & ROLLBACK
