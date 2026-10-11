@@ -421,6 +421,16 @@ GROUP BY salesperson;
 SELECT * FROM hight_performance
 WHERE sales_rank = 1;
 -- Ek view banao jisme monthly sales hon, phir us view se March ki sales find karo.
+CREATE VIEW monthly_sales AS
+SELECT
+    TO_CHAR(order_date, 'Month') AS month,
+    SUM(total_amount) AS total_sale
+FROM ecommerce_sales
+GROUP BY TO_CHAR(order_date, 'Month');
+
+SELECT total_sale
+FROM monthly_sales
+WHERE TRIM(month) = 'March';
 -- Kisi ek view ko DROP VIEW karo aur phir dobara create karo.
 -- 📅 DAY 5 — COMMIT & ROLLBACK
 
