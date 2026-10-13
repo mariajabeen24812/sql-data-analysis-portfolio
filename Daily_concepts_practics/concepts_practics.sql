@@ -432,11 +432,9 @@ SELECT total_sale
 FROM monthly_sales
 WHERE TRIM(month) = 'March';
 -- Kisi ek view ko DROP VIEW karo aur phir dobara create karo.
+DROP view monthly_sales;
 -- 📅 DAY 5 — COMMIT & ROLLBACK
 
--- ⚠️ Ye queries practice database mein run karna. Important database par experiment mat karna.
-
--- Q41–Q50
 -- Ek transaction start karo aur kisi order ka order_status update karo. Phir ROLLBACK karo. Check karo change hua ya nahi.
 -- Transaction start karo aur ek customer's city change karo. COMMIT karo. Phir check karo change permanent hua ya nahi.
 -- Transaction ke andar kisi order ka total_amount change karo, phir ROLLBACK karo.
