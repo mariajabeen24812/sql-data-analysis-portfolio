@@ -435,7 +435,12 @@ WHERE TRIM(month) = 'March';
 DROP view monthly_sales;
 -- 📅 DAY 5 — COMMIT & ROLLBACK
 
--- Ek transaction start karo aur kisi order ka order_status update karo. Phir ROLLBACK karo. Check karo change hua ya nahi.
+-- Ek transaction start karo aur kisi order ka order_status update karo. 
+BEGIN;
+UPDATE order_status = 'Uncomplete'
+WHERE order_id = 3;
+commit;
+
 -- Transaction start karo aur ek customer's city change karo. COMMIT karo. Phir check karo change permanent hua ya nahi.
 -- Transaction ke andar kisi order ka total_amount change karo, phir ROLLBACK karo.
 -- Transaction mein 2 rows update karo aur COMMIT karo.
